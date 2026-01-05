@@ -2,6 +2,8 @@
 
 # 🎯 Linear Regression from Scratch
 
+<img src="https://readme-typing-svg.herokuapp.com? font=Fira+Code&size=22&duration=3000&pause=1000&color=2E9EF7&center=true&vCenter=true&width=600&lines=Building+ML+Foundations;From+-18+R%C2%B2+to+98%25+Accuracy;Pure+NumPy+Implementation;Learning+by+Doing" alt="Typing SVG" />
+
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
@@ -27,7 +29,7 @@
 <table align="center">
 <tr>
 <td align="center" width="25%">
-<img src="https://img.shields.io/badge/R² Score-98.74%25-success?style=for-the-badge&logo=chartdotjs" />
+<img src="https://img.shields.io/badge/R² Score-98. 74%25-success?style=for-the-badge&logo=chartdotjs" />
 <br><b>Best Performance</b>
 </td>
 <td align="center" width="25%">
@@ -120,7 +122,7 @@ graph LR
 
 - ✅ **Three Gradient Descent Methods**
   - 📊 Batch GD
-  - ⚡ Stochastic GD  
+  - ⚡ Stochastic GD
   - 🔄 Mini-Batch GD
 
 - ✅ **Advanced ML Techniques**
@@ -188,7 +190,7 @@ python main.py
 
 ```bash
 # Build the image
-docker build -t linear-regression .
+docker build -t linear-regression . 
 
 # Run the container
 docker run -it -p 8888:8888 linear-regression
@@ -210,7 +212,7 @@ from linear_regression import LinearRegression
 from data_preprocessing import load_and_preprocess_data
 
 # Load your data
-X_train, X_test, y_train, y_test = load_and_preprocess_data('Advertising. csv')
+X_train, X_test, y_train, y_test = load_and_preprocess_data('Advertising.csv')
 
 # Create and train model
 model = LinearRegression(
@@ -232,7 +234,7 @@ print(f"✨ Model R² Score: {model.evaluate(y_test, predictions):.4f}")
 
 ```python
 methods = {
-    '📊 Batch GD': {'method': 'batch', 'iter': 50000},
+    '📊 Batch GD':  {'method': 'batch', 'iter': 50000},
     '⚡ Stochastic GD': {'method': 'stochastic', 'iter': 50},
     '🔄 Mini-Batch GD': {'method': 'mini-batch', 'iter': 1000, 'batch_size': 16}
 }
@@ -241,7 +243,7 @@ for name, params in methods.items():
     model = LinearRegression(learn_rate=0.01, **params)
     model.fit(X_train, y_train)
     score = calculate_r2(y_test, model.predict(X_test))
-    print(f"{name}:  R² = {score:.4f}")
+    print(f"{name}: R² = {score:.4f}")
 ```
 
 ### 📊 Cross-Validation
@@ -300,7 +302,7 @@ plot_actual_vs_predicted(y_test, predictions)
 │       ├── 📄 linear_regression.py        # Core model
 │       ├── 📄 model_evaluation.py         # Metrics & CV
 │       ├── 📄 visualization. py            # Plotting utils
-│       ├── 📄 main. py                     # Main script
+│       ├── 📄 main.py                     # Main script
 │       └── 📄 config.py                   # Configuration
 │
 ├── 🧪 tests/                               # Test suite
@@ -311,13 +313,20 @@ plot_actual_vs_predicted(y_test, predictions)
 │   ├── 📄 test_integration.py
 │   └── 📄 conftest.py
 │
+├── 📊 outputs/                             # Generated visualizations
+│   ├── 🖼️ loss_convergence.png
+│   ├── 🖼️ residual_plot.png
+│   ├── 🖼️ correlation_matrix.png
+│   ├── 🖼️ actual_vs_predicted.png
+│   └── 🖼️ feature_importance.png
+│
 ├── 📊 Advertising.csv                      # Dataset
 ├── 📋 requirements.txt                     # Dependencies
 ├── 📋 requirements-dev.txt                 # Dev dependencies
 ├── 🐳 Dockerfile                           # Container config
 ├── 🐳 docker-compose.yml                   # Orchestration
 ├── ⚙️ Makefile                             # Utility commands
-├── 📖 README.md                            # You are here!
+├── 📖 README.md                            # You are here! 
 ├── 📖 INSTALL.md                           # Installation guide
 └── 📜 LICENSE                              # MIT License
 ```
@@ -443,7 +452,7 @@ R² Score Evolution
 0.6 ┤                ████████
 0.5 ┤       ████████
 0.0 ┼──────────────────────────────────────────────────────────►
-   -1.0┤███                                              Iterations
+   -1. 0┤███                                              Iterations
 -10.0 ┤███ 😱
 -18.0 ┤███
       V1   V2      V3           V4-V8              V9
@@ -582,7 +591,7 @@ $$b := b - \alpha \cdot \frac{1}{m}\sum_{i=1}^{m}(h_\mathbf{w}(x^{(i)}) - y^{(i)
 **Expanded to 9 features:**
 
 | Feature # | Expression | Description |
-|:---------:|:----------:|: ------------|
+|:---------:|:----------:|:------------|
 | 1 | $TV$ | Original TV budget |
 | 2 | $Radio$ | Original Radio budget |
 | 3 | $Newspaper$ | Original Newspaper budget |
@@ -611,7 +620,7 @@ $$b := b - \alpha \cdot \frac{1}{m}\sum_{i=1}^{m}(h_\mathbf{w}(x^{(i)}) - y^{(i)
 
 #### 📉 Loss Convergence
 
-<img src="https://via.placeholder.com/400x300/2E9EF7/FFFFFF?text=Loss+Convergence+Curve" alt="Loss Convergence" />
+![Loss Convergence](outputs/loss_convergence.png)
 
 *Smooth convergence to global minimum*
 
@@ -620,7 +629,7 @@ $$b := b - \alpha \cdot \frac{1}{m}\sum_{i=1}^{m}(h_\mathbf{w}(x^{(i)}) - y^{(i)
 
 #### 🎯 Residual Analysis
 
-<img src="https://via.placeholder.com/400x300/90EE90/FFFFFF?text=Residual+Plot" alt="Residual Plot" />
+![Residual Plot](outputs/residual_plot.png)
 
 *Random scatter indicates good fit*
 
@@ -631,7 +640,7 @@ $$b := b - \alpha \cdot \frac{1}{m}\sum_{i=1}^{m}(h_\mathbf{w}(x^{(i)}) - y^{(i)
 
 #### 📊 Actual vs Predicted
 
-<img src="https://via.placeholder.com/400x300/FFD700/FFFFFF?text=Actual+vs+Predicted" alt="Actual vs Predicted" />
+![Actual vs Predicted](outputs/actual_vs_predicted.png)
 
 *Points close to diagonal line*
 
@@ -640,7 +649,7 @@ $$b := b - \alpha \cdot \frac{1}{m}\sum_{i=1}^{m}(h_\mathbf{w}(x^{(i)}) - y^{(i)
 
 #### 🔥 Correlation Matrix
 
-<img src="https://via.placeholder.com/400x300/FF6B6B/FFFFFF? text=Correlation+Heatmap" alt="Correlation Heatmap" />
+![Correlation Heatmap](outputs/correlation_matrix.png)
 
 *Feature relationships visualized*
 
@@ -652,7 +661,7 @@ $$b := b - \alpha \cdot \frac{1}{m}\sum_{i=1}^{m}(h_\mathbf{w}(x^{(i)}) - y^{(i)
 
 #### 🏆 Feature Importance
 
-<img src="https://via.placeholder.com/800x300/9B59B6/FFFFFF?text=Feature+Importance+Bar+Chart" alt="Feature Importance" />
+![Feature Importance](outputs/feature_importance.png)
 
 *TV advertising shows strongest impact on sales*
 
@@ -909,7 +918,7 @@ Found a bug?
 
 ### 💡 Feature Requests
 
-Have an idea?
+Have an idea? 
 <br>
 [Suggest a Feature](https://github.com/willow788/Linear-Regression-model-from-scratch/issues)
 
@@ -963,7 +972,7 @@ git push origin feature/AmazingFeature
 
 This project is licensed under the **MIT License**
 
-[![License:  MIT](https://img.shields.io/badge/License-MIT-yellow.svg? style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![License:  MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 See [LICENSE](LICENSE) for more information.
 
@@ -1028,7 +1037,7 @@ GitHub Community
 
 ### Let's Connect! 🌐
 
-[![GitHub](https://img.shields.io/badge/GitHub-willow788-181717? style=for-the-badge&logo=github)](https://github.com/willow788)
+[![GitHub](https://img.shields.io/badge/GitHub-willow788-181717?style=for-the-badge&logo=github)](https://github.com/willow788)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/willow788)
 [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)
 [![Twitter](https://img.shields.io/badge/Twitter-Follow-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/willow788)
@@ -1041,15 +1050,15 @@ GitHub Community
 
 <div align="center">
 
-<img src="https://img.shields.io/github/stars/willow788/Linear-Regression-model-from-scratch? style=for-the-badge&logo=github" alt="Stars" />
+<img src="https://img.shields.io/github/stars/willow788/Linear-Regression-model-from-scratch?style=for-the-badge&logo=github" alt="Stars" />
 <img src="https://img.shields.io/github/forks/willow788/Linear-Regression-model-from-scratch?style=for-the-badge&logo=github" alt="Forks" />
-<img src="https://img.shields.io/github/issues/willow788/Linear-Regression-model-from-scratch? style=for-the-badge&logo=github" alt="Issues" />
+<img src="https://img.shields.io/github/issues/willow788/Linear-Regression-model-from-scratch?style=for-the-badge&logo=github" alt="Issues" />
 <img src="https://img.shields.io/github/license/willow788/Linear-Regression-model-from-scratch?style=for-the-badge" alt="License" />
 <img src="https://img.shields.io/github/last-commit/willow788/Linear-Regression-model-from-scratch?style=for-the-badge&logo=github" alt="Last Commit" />
 
 ### Language Composition
 
-<img src="https://img.shields.io/badge/Jupyter%20Notebook-65. 5%25-F37626? style=for-the-badge&logo=jupyter" alt="Jupyter" />
+<img src="https://img.shields.io/badge/Jupyter%20Notebook-65. 5%25-F37626?style=for-the-badge&logo=jupyter" alt="Jupyter" />
 <img src="https://img.shields.io/badge/Python-34.5%25-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
 
 </div>
