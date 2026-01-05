@@ -1,0 +1,16 @@
+the main problem that we encountered in version 1 of this model is that we have a negative r^2 value
+
+what does negative r^2 value means? :
+it means---model's predictions are, on average, worse than a simple horizontal line drawn at the mean of the actual data points. 
+
+why are we getting a negative r^2 value ?
+because of the following reasons
+1. learning rate of the model is too high
+2. no of interation is too low.
+
+model = LinearRegression(learn_rate=0.0001, iter=1000)
+we are initialising our model like this so, here the no. of iteration is so low and learning rate is so high that the model ends up getting underfitted.
+
+this can be fixed by changing the learing rate to a much smaller value and increasing the number of iterations.
+
+Now we will do these modifications and see how the model has changed it's r^2 score.
