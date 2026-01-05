@@ -1,0 +1,40 @@
+The main problem that we were facing was that all predictions are giving "NaN"
+THIS MAY BE BECAUSE OF THE FOLLOWING REASONS:
+
+NaNs almost always mean something blew up during gradient descent.
+
+1. Learning rate too big
+
+2. Features on wildly different scales
+
+3. Data already has NaNs
+
+4. Integer math or wrong shapes
+
+5. Loss exploded to infinity, then NaN
+
+
+HOW DID I FIX THEM? :
+
+1. Lowered the learning rate : (1e-7)
+2. Increased the no of iterations
+3. normalised the X and y
+---------------------------------------------
+| X = (X - X.mean(axis=0)) / X.std(axis=0) | ---by doing this
+---------------------------------------------
+4. check if data already had NaN (IT DID NOT )
+How to check?
+-------------------------
+| print(data.isna().sum()) | --- code this after loading the dataset 
+----------------------------
+
+5.  converted X an y to float type:
+X = X.astype(float) 
+y = y.astype(float)
+add these two lines after the specifing what will n=be th features and samples.
+
+6. Add the bias (X_b) correctly
+
+7. check and fix the gradient equation and also fix the self weights update equation
+
+
