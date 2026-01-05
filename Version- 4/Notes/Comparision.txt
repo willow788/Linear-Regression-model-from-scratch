@@ -1,1 +1,71 @@
-this version of jupyter notebook compares various methods of gradient descents and implements them too.
+this version of jupyter notebook compares various methods of gradient descents and implements them too. 
+
+GRADIENT DESCENT VARIANTS - THEORETICAL COMPARISON
+
+1. BATCH GRADIENT DESCENT (BGD)
+   - Uses the entire dataset to compute gradients in each iteration
+   - Advantages: 
+     * Stable convergence (smooth gradient updates)
+     * Guaranteed to converge to global minimum for convex functions
+     * Efficient for small to medium datasets
+   - Disadvantages:
+     * Computationally expensive for large datasets
+     * Slow training time as dataset size increases
+     * Requires entire dataset to fit in memory
+   - Update Rule: θ = θ - α * (1/m) * Σ(h(x^i) - y^i) * x^i for all samples
+
+2. STOCHASTIC GRADIENT DESCENT (SGD)
+   - Uses a single random sample to compute gradients in each iteration
+   - Advantages:
+     * Much faster per iteration
+     * Can handle large datasets efficiently
+     * Better at escaping local minima due to noisy updates
+     * Enables online learning
+   - Disadvantages:
+     * High variance in gradient estimates (noisy convergence)
+     * May not converge to exact minimum, oscillates around it
+     * Requires learning rate tuning
+   - Update Rule: θ = θ - α * (h(x^i) - y^i) * x^i for single sample i
+
+3. MINI-BATCH GRADIENT DESCENT (MBGD)
+   - Uses a small batch of samples to compute gradients
+   - Advantages:
+     * Balance between BGD and SGD
+     * Reduces variance compared to SGD
+     * Computationally efficient (leverages vectorization)
+     * More stable convergence than SGD
+     * Can fit in GPU memory for faster computation
+   - Disadvantages: 
+     * Requires hyperparameter tuning (batch size)
+     * Still has some oscillation (less than SGD)
+   - Common batch sizes: 32, 64, 128, 256
+   - Update Rule: θ = θ - α * (1/b) * Σ(h(x^i) - y^i) * x^i for batch size b
+
+4. MOMENTUM-BASED GRADIENT DESCENT
+   - Accumulates exponentially weighted average of past gradients
+   - Advantages:
+     * Accelerates convergence in relevant direction
+     * Dampens oscillations
+     * Helps escape shallow local minima
+   - Hyperparameter: β (momentum coefficient, typically 0.9)
+   - Update Rule: 
+     v = β*v + α*gradient
+     θ = θ - v
+
+5. ADAPTIVE LEARNING RATE METHODS
+   a) AdaGrad:  Adapts learning rate for each parameter based on historical gradients
+   b) RMSprop: Uses moving average of squared gradients
+   c) Adam: Combines momentum and adaptive learning rates (most popular)
+
+KEY COMPARISON METRICS:
+- Convergence Speed:  SGD > MBGD > BGD
+- Stability: BGD > MBGD > SGD
+- Memory Requirements: SGD < MBGD < BGD
+- Final Accuracy: BGD ≈ MBGD > SGD
+- Practical Usage: MBGD (most commonly used in practice)
+
+WHEN TO USE WHICH: 
+- Small datasets (<10,000 samples): Batch Gradient Descent
+- Large datasets (>100,000 samples): Mini-Batch or Stochastic GD
+- Need for online learning:  Stochastic Gradient Descent
+- Deep learning applications: Mini-Batch with Adam optimizer
