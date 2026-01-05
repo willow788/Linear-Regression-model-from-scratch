@@ -1,1 +1,32 @@
-add feature importance analysis, that helps you to undeerstand which feature affects the prediction more
+1.  Add feature importance analysis that helps you to understand which feature affects the prediction more
+
+## What is Feature Importance Analysis? 
+Feature importance analysis identifies which input features (variables) have the strongest influence on the model's predictions. In linear regression, this is typically measured by the magnitude of the coefficients.
+
+## Methods to Calculate Feature Importance: 
+
+### 1. Coefficient Magnitude (Absolute Values)
+- Larger absolute coefficient values indicate stronger influence on the target variable
+- Formula: importance = |coefficient|
+- Note: Features must be scaled/normalized for fair comparison
+
+### 2. Standardized Coefficients
+- Multiply coefficients by the standard deviation of each feature
+- Formula: standardized_coef = coefficient × std(feature)
+- Allows direct comparison even without feature scaling
+
+### 3. Coefficient with Sign
+- Positive coefficients: feature increases the target as it increases
+- Negative coefficients: feature decreases the target as it increases
+
+## Implementation Considerations:
+- Normalize/standardize features before training for accurate importance ranking
+- Display importance as percentages or relative rankings
+- Visualize with bar plots or sorted tables
+- Consider correlation between features (multicollinearity affects interpretation)
+
+## Benefits:
+- Understand model behavior and decision-making process
+- Identify most influential features for predictions
+- Guide feature selection and engineering
+- Improve model interpretability for stakeholders
