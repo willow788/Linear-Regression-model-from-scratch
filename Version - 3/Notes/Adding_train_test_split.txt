@@ -1,0 +1,2 @@
+now we are adding train_test_split. 
+but all of a sudden r2 got all negative again..
