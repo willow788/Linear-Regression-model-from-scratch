@@ -1,1 +1,65 @@
 now we are modifying the main linear regression function and adding l1 regularisation in it
+
+L1 Regularization (Lasso Regression) - Complete Notes
+======================================================
+
+1.  WHAT IS L1 REGULARIZATION? 
+   - L1 regularization adds a penalty term to the cost function equal to the sum of absolute values of coefficients
+   - Also known as Lasso (Least Absolute Shrinkage and Selection Operator)
+   - Penalty term: λ * Σ|θj| where λ is the regularization parameter
+
+2. MODIFIED COST FUNCTION:
+   J(θ) = MSE + λ * Σ|θj|
+   J(θ) = (1/2m) * Σ(h(x) - y)² + λ * Σ|θj|
+   
+   Where:
+   - m = number of training examples
+   - λ = regularization parameter (controls strength of regularization)
+   - θj = model parameters (weights)
+
+3. GRADIENT DESCENT WITH L1:
+   The gradient update becomes:
+   θj = θj - α * (∂J/∂θj)
+   
+   Where the gradient is:
+   ∂J/∂θj = (1/m) * Σ(h(x) - y) * xj + λ * sign(θj)
+   
+   Note: sign(θj) = +1 if θj > 0, -1 if θj < 0, 0 if θj = 0
+
+4. KEY PROPERTIES:
+   - Promotes sparsity:  Can shrink some coefficients exactly to zero
+   - Performs automatic feature selection
+   - More robust to outliers than L2
+   - Creates interpretable models by eliminating irrelevant features
+   - Does not have a closed-form solution (unlike unregularized regression)
+
+5. IMPLEMENTATION CONSIDERATIONS:
+   - Choose appropriate λ value (use cross-validation)
+   - Handle the non-differentiable point at θj = 0
+   - Options: use subgradient descent or proximal gradient methods
+   - Normalize/standardize features before applying L1
+
+6. WHEN TO USE L1:
+   - When you suspect many features are irrelevant
+   - When you need feature selection
+   - When model interpretability is important
+   - When dealing with high-dimensional data
+
+7. COMPARISON WITH L2 (Ridge):
+   L1 (Lasso):
+   - Penalty:  Σ|θj|
+   - Creates sparse models
+   - Feature selection
+   - Better for irrelevant features
+   
+   L2 (Ridge):
+   - Penalty: Σθj²
+   - Shrinks coefficients but rarely to zero
+   - No feature selection
+   - Better when all features are relevant
+
+8. PRACTICAL TIPS:
+   - Start with λ = 0.01 to 1. 0 and tune via cross-validation
+   - Use elastic net (combination of L1 and L2) for best of both worlds
+   - Monitor the number of non-zero coefficients
+   - Check model performance on validation set
