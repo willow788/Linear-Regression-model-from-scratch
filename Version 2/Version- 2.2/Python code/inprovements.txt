@@ -1,0 +1,88 @@
+# Version 2.2 - Improved Linear Regression (Still Problematic)
+
+This version attempts to fix the issues from Version 2.1 by improving hyperparameters and mathematical correctness.
+
+## Key Changes from Version 2.1
+
+1. **Increased iterations**:  1000 → 80000
+2. **Modified learning rate**: 0.0001 → 0.01
+3. **Better precision**: float32 → float64
+4. **Corrected loss function**: `(1/m)` → `(1/(2*m))`
+5. **Corrected gradient**: `(2/m)` → `(1/m)`
+6. **Added progress tracking**: Prints loss every 5000 iterations
+
+## Problem
+
+Despite improvements, the model still achieves a **negative R² score** (-0.73), which is better than Version 2.1 (-4.55) but still indicates: 
+- Model predictions are worse than a horizontal line at the mean
+- Model is still underfitted
+
+## Root Causes
+
+1. **Target variable not normalized** - causes numerical instability
+2. **Learning rate still not optimal**
+3. **Bias concatenated to features** instead of separate parameter
+
+## Files
+
+- `data_preprocessing.py` - Data loading with float64 precision
+- `linear_regression.py` - Model with corrected loss/gradient calculations
+- `metrics.py` - Evaluation metrics
+- `train.py` - Main training script with analysis
+- `visualization.py` - Plotting utilities
+- `train_with_visualization.py` - Training with visualizations
+
+## Usage
+
+### Basic Training
+
+```python
+from data_preprocessing import load_and_prepare_data, add_bias_term
+from linear_regression import LinearRegression
+from metrics import evaluate_model
+
+# Load data
+X, y = load_and_prepare_data('Advertising.csv')
+X_b = add_bias_term(X)
+
+# Train model
+model = LinearRegression(learn_rate=0.01, iter=80000)
+model.fit(X_b, y)
+
+# Evaluate
+predictions = model.predict(X_b)
+evaluate_model(y, predictions)
+```
+
+### With Visualization
+
+```python
+from train_with_visualization import main
+
+model, metrics = main()
+```
+
+## Results
+
+```
+Loss at iteration 0: 111.85812535476691
+Loss at iteration 5000: 101.22863700763989
+... 
+Loss at iteration 75000: 25.78950710570885
+
+Mean Squared Error: 46.928604397866295
+Root Mean Squared Error: 6.850445561995679
+Mean Absolute Error: 6.342178543247201
+R^2 Score: -0.7325942129640952
+```
+
+## Observations
+
+- ✅ Loss is decreasing (111.86 → 25.79)
+- ❌ R² is still negative (-0.73)
+- ✅ Better than Version 2.1 (improved from -4.55)
+- ❌ Still not acceptable performance
+
+## Next Steps
+
+See **Version 2.3** which normalizes the target variable to achieve positive R² scores.
