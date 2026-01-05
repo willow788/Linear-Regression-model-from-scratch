@@ -1,0 +1,2 @@
+Now we are modifying the jupyter notebook code and adding l2 regularisation in the loss functions.
+why ?
