@@ -1,0 +1,281 @@
+# Version 4 - Multiple Gradient Descent Methods
+
+🚀 **NEW FEATURE:  Three different gradient descent optimization methods! **
+
+## What's New
+
+This version adds **multiple gradient descent methods** to the linear regression model:
+
+1. **Batch Gradient Descent** (default)
+2. **Stochastic Gradient Descent (SGD)**
+3. **Mini-Batch Gradient Descent**
+
+All built on the solid foundation of Version 3.1! 
+
+## The Three Methods
+
+### 1. Batch Gradient Descent
+
+```python
+model = LinearRegression(learn_rate=0.02, iter=50000, method='batch')
+```
+
+**How it works:**
+- Uses ALL training samples to compute gradient
+- Updates parameters once per iteration
+- Most stable, smooth convergence
+
+**Pros:**
+- ✅ Smooth, stable convergence
+- ✅ Guaranteed to converge to minimum (for convex problems)
+- ✅ Easy to understand and implement
+
+**Cons:**
+- ❌ Slow for large datasets
+- ❌ Requires all data in memory
+
+**Best for:** Small to medium datasets
+
+### 2. Stochastic Gradient Descent (SGD)
+
+```python
+model = LinearRegression(learn_rate=0.01, iter=50, method='stochastic')
+```
+
+**How it works:**
+- Uses ONE sample at a time
+- Updates parameters after each sample
+- m updates per epoch (where m = number of samples)
+
+**Pros:**
+- ✅ Fast updates
+- ✅ Can escape local minima
+- ✅ Works for online learning
+
+**Cons:**
+- ❌ Noisy convergence
+- ❌ Requires careful learning rate tuning
+- ❌ May oscillate around minimum
+
+**Best for:** Very large datasets, online/streaming data
+
+### 3. Mini-Batch Gradient Descent
+
+```python
+model = LinearRegression(learn_rate=0.01, iter=1000, 
+                          method='mini-batch', batch_size=16)
+```
+
+**How it works:**
+- Uses small batches of samples (e.g., 16, 32, 64)
+- Updates parameters after each batch
+- m/batch_size updates per epoch
+
+**Pros:**
+- ✅ Balance of speed and stability
+- ✅ Works well with vectorization
+- ✅ Reduces variance compared to SGD
+- ✅ Most commonly used in practice! 
+
+**Cons:**
+- ❌ Requires tuning batch size
+
+**Best for:** Most practical applications (industry standard!)
+
+## Files
+
+```
+Version_4/Organised_Python_Code/
+├── data_preprocessing.py          # Same as Version 3.1
+├── linear_regression.py           # Model with 3 GD methods! 
+├── metrics.py                     # Metrics + method comparison
+├── train_all_methods.py           # Train all 3 methods
+├── visualization.py               # Method comparison plots
+├── train_with_visualization.py    # Complete pipeline
+└── README.md                      # This file
+```
+
+## Quick Start
+
+### Train Single Method
+
+```python
+from data_preprocessing import load_and_split_data
+from linear_regression import LinearRegression
+from metrics import evaluate_model
+
+# Load data
+X_train, X_test, y_train, y_test, *_ = load_and_split_data('Advertising.csv')
+
+# Choose your method: 
+
+# Option 1: Batch GD
+model = LinearRegression(learn_rate=0.02, iter=50000, method='batch')
+
+# Option 2: SGD
+model = LinearRegression(learn_rate=0.01, iter=50, method='stochastic')
+
+# Option 3: Mini-Batch GD
+model = LinearRegression(learn_rate=0.01, iter=1000, 
+                          method='mini-batch', batch_size=16)
+
+# Train and evaluate
+model.fit(X_train, y_train)
+test_pred = model.predict(X_test)
+evaluate_model(y_test, test_pred, "Test")
+```
+
+### Compare All Methods
+
+```python
+from train_all_methods import main
+
+models, results = main()
+```
+
+### With Visualizations
+
+```python
+from train_with_visualization import main
+
+models, results = main()
+```
+
+## Results
+
+All three methods achieve similar final performance: 
+
+| Method | Train R² | Test R² | Test MSE | Iterations |
+|--------|----------|---------|----------|------------|
+| Batch GD | 0.8957 | 0.8994 | 0.1224 | 50,000 |
+| SGD | 0.8943 | 0.8929 | 0.1303 | 50 epochs |
+| Mini-Batch GD | 0.8957 | 0.8994 | 0.1224 | 1,000 epochs |
+
+**Key Insight:** All methods converge to similar solutions, but with different convergence characteristics! 
+
+## Implementation Details
+
+### Batch Gradient Descent
+
+```python
+def _batch_gradient_descent(self, X, y, m):
+    # Use all data
+    y_pred = X @ self.weights + self.bias
+    error = y_pred - y
+    
+    # Compute gradients from all samples
+    grad_w = (1/m) * (X.T @ error)
+    grad_b = (1/m) * np.sum(error)
+    
+    # Single update
+    self.weights -= self. lr * grad_w
+    self. bias -= self.lr * grad_b
+```
+
+### Stochastic Gradient Descent
+
+```python
+def _stochastic_gradient_descent(self, X, y, m):
+    # Loop through each sample
+    for i in range(m):
+        xi = X[i]. reshape(1, -1)
+        yi = y[i]. reshape(1, -1)
+        
+        # Compute gradient from single sample
+        y_pred = xi @ self.weights + self.bias
+        error = y_pred - yi
+        
+        gradient_w = xi.T @ error
+        gradient_b = error. item()
+        
+        # Immediate update
+        self.weights -= self.lr * gradient_w
+        self.bias -= self.lr * gradient_b
+```
+
+### Mini-Batch Gradient Descent
+
+```python
+def _mini_batch_gradient_descent(self, X, y, m):
+    # Shuffle data
+    perm = np.random.permutation(m)
+    X_shuffle = X[perm]
+    y_shuffle = y[perm]
+    
+    # Process mini-batches
+    for start in range(0, m, self.batch_size):
+        end = start + self.batch_size
+        xb = X_shuffle[start: end]
+        yb = y_shuffle[start:end]
+        
+        # Compute gradient from batch
+        y_pred = xb @ self.weights + self. bias
+        error = y_pred - yb
+        
+        gradient_w = (1/self.batch_size) * (xb.T @ error)
+        gradient_b = (1/self.batch_size) * np.sum(error)
+        
+        # Update after batch
+        self.weights -= self.lr * gradient_w
+        self.bias -= self.lr * gradient_b
+```
+
+## Visualizations
+
+1. **Loss Convergence Comparison** - All three methods on one plot
+2. **Performance Comparison Bars** - R² and MSE side-by-side
+3. **Comprehensive Dashboard** - 9-panel comparison view
+
+## When to Use Each Method
+
+```
+Dataset Size         | Recommended Method
+---------------------|-------------------
+< 10,000 samples     | Batch GD
+10,000 - 100,000     | Mini-Batch GD
+> 100,000 samples    | Mini-Batch GD or SGD
+Streaming/Online     | SGD
+```
+
+## Hyperparameter Notes
+
+### Learning Rates
+- **Batch GD**: Can use higher LR (0.01-0.1)
+- **SGD**: Needs lower LR (0.001-0.01)
+- **Mini-Batch**:  Medium LR (0.01-0.05)
+
+### Iterations/Epochs
+- **Batch GD**: More iterations needed (10,000-100,000)
+- **SGD**: Fewer epochs needed (10-100)
+- **Mini-Batch**: Medium epochs (100-10,000)
+
+### Batch Size (Mini-Batch only)
+- Common values: 16, 32, 64, 128, 256
+- Smaller batches:  More updates, noisier
+- Larger batches:  Fewer updates, more stable
+- **Sweet spot for most cases:  32**
+
+## Comparison with Version 3.1
+
+| Feature | Version 3.1 | Version 4 |
+|---------|-------------|-----------|
+| Gradient Descent Methods | 1 (Batch only) | 3 (Batch, SGD, Mini-Batch) |
+| Method Selection | Fixed | Configurable via `method` parameter |
+| Batch Size Parameter | N/A | Available for mini-batch |
+| Performance | R² ~0.90 | R² ~0.89-0.90 (all methods) |
+
+## Key Learnings
+
+1. **All roads lead to Rome**:  Different methods converge to similar solutions
+2. **Speed vs Stability**: Trade-off between update frequency and convergence smoothness
+3. **Mini-Batch is King**: Best balance for most real-world applications
+4. **Hyperparameters Matter**: Each method needs different learning rates and iterations
+
+## Next Steps
+
+- **Version 5**:  Adds L2 regularization (Ridge regression)
+- **Version 6**: Adds L1 regularization (Lasso regression)
+
+---
+
+**🚀 This version demonstrates the flexibility of gradient descent optimization! **
