@@ -1,0 +1,28 @@
+The previous issue has been fixed:
+
+1. prevously the self.bias was not used in the predicting function.. so we had mdoified the code 
+like this:
+def predict(self, X):
+        return np.dot(X, self.weights) + self.bias
+
+2. also normalised the y_train and y_test alongside with X_train and X_test
+
+3. learning rrate was the main problem change it from 0.001 to 0.01
+
+Result:
+the output is:
+Loss at iteration 0: 0.49999999999999983
+Loss at iteration 5000: 0.05214958644910914
+Loss at iteration 10000: 0.05214958644910914
+Loss at iteration 15000: 0.05214958644910914
+Loss at iteration 20000: 0.05214958644910914
+Loss at iteration 25000: 0.05214958644910914
+Loss at iteration 30000: 0.05214958644910914
+Loss at iteration 35000: 0.05214958644910914
+Loss at iteration 40000: 0.05214958644910914
+Loss at iteration 45000: 0.05214958644910914
+Mean Squared Error: 0.12238073561043301
+Root Mean Squared Error: 0.3498295808110472
+Mean Absolute Error: 0.2868298198200943
+R^2 Score on test set: 0.8994380241009123
+R^2 Score on training set: 0.8957008271017817
