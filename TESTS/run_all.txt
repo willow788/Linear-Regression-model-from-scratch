@@ -1,0 +1,8 @@
+# Run all tests
+pytest
+
+# Run with coverage report
+pytest --cov=. --cov-report=html
+
+# Run with verbose output
+pytest -v
