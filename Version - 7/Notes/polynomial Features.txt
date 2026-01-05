@@ -1,0 +1,4 @@
+Polynomial Features :
+
+Add interaction terms like: • TV * Radio • TV² • Radio² Train again.
+You’ll probably get R² ≈ 0.95.
