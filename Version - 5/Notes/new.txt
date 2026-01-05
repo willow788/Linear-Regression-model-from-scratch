@@ -1,2 +1,25 @@
 Now we are modifying the jupyter notebook code and adding l2 regularisation in the loss functions.
-why ?
+why ? 
+
+L2 regularization (Ridge Regression) is added to prevent overfitting and improve model generalization. Here's why:
+
+1. **Prevents Overfitting**: Without regularization, the model might fit too closely to training data, capturing noise rather than true patterns. 
+
+2. **Controls Weight Magnitude**: L2 regularization adds a penalty term (λ * ||w||²) to the loss function, which discourages large weight values. This keeps the model simpler. 
+
+3. **Improves Generalization**: By constraining weights, the model performs better on unseen data rather than just memorizing training examples.
+
+4. **Handles Multicollinearity**: When features are highly correlated, L2 regularization distributes weights more evenly, making the model more stable.
+
+5. **Mathematical Formulation**: 
+   - Standard Loss: J(w) = MSE
+   - With L2: J(w) = MSE + λ * ||w||²
+   - Where λ (lambda) is the regularization parameter controlling the penalty strength
+
+6. **Benefits in Our Implementation**:
+   - More robust predictions
+   - Reduced variance in weight estimates
+   - Better performance on validation/test data
+   - Smoother decision boundaries
+
+The key is finding the right λ value through cross-validation - too small has little effect, too large oversimplifies the model.
