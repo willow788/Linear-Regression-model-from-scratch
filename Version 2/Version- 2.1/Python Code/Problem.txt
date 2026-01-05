@@ -1,0 +1,55 @@
+# Version 2.1 - Basic Linear Regression (Demonstrating Issue)
+
+This version is identical to Version 1 and demonstrates the problem with improper hyperparameter selection.
+
+## Problem
+
+The model achieves a **negative R² score** (-4.55), which means: 
+- The model's predictions are worse than a simple horizontal line at the mean
+- The model is severely underfitted
+
+## Root Causes
+
+1. **Learning rate too high**: 0.0001
+2. **Too few iterations**: 1000
+3. **Bias term concatenated to features** instead of using separate bias parameter
+
+## Files
+
+- `data_preprocessing.py` - Data loading and preprocessing functions
+- `linear_regression.py` - Linear regression model implementation
+- `metrics.py` - Evaluation metrics
+- `train.py` - Main training script
+
+## Usage
+
+```python
+from data_preprocessing import load_and_prepare_data, add_bias_term
+from linear_regression import LinearRegression
+from metrics import evaluate_model
+
+# Load data
+X, y = load_and_prepare_data('Advertising. csv')
+X_b = add_bias_term(X)
+
+# Train model
+model = LinearRegression(learn_rate=0.0001, iter=1000)
+model.fit(X_b, y)
+
+# Evaluate
+predictions = model.predict(X_b)
+evaluate_model(y, predictions)
+```
+
+## Results
+
+```
+Mean Squared Error: 150.24585952604696
+Root Mean Squared Error: 12.257481777512336
+Mean Absolute Error: 11.481235550612286
+R^2 Score:  -4.547045561586764
+```
+
+## Next Steps
+
+See **Version 2.2** and **Version 2.3** for solutions to this problem.
