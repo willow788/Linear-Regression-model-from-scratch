@@ -2,8 +2,6 @@
 
 # 🎯 Linear Regression from Scratch
 
-<img src="https://readme-typing-svg.herokuapp.com? font=Fira+Code&size=22&duration=3000&pause=1000&color=2E9EF7&center=true&vCenter=true&width=600&lines=Building+ML+Foundations;From+-18+R%C2%B2+to+98%25+Accuracy;Pure+NumPy+Implementation;Learning+by+Doing" alt="Typing SVG" />
-
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
